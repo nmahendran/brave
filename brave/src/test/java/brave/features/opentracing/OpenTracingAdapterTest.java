@@ -12,6 +12,8 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Test;
 import zipkin2.Annotation;
+import zipkin2.Span;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.data.MapEntry.entry;
@@ -22,7 +24,7 @@ import static org.assertj.core.data.MapEntry.entry;
  */
 public class OpenTracingAdapterTest {
   List<zipkin2.Span> spans = new ArrayList<>();
-  Tracing brave = Tracing.newBuilder().spanReporter(spans::add).build();
+  Tracing brave = Tracing.newBuilder().reporter((Reporter<Span>) spans::add).build();
   BraveTracer opentracing = BraveTracer.wrap(brave);
 
   @After public void close() {

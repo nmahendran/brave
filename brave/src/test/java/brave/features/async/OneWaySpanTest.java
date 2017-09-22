@@ -34,11 +34,11 @@ public class OneWaySpanTest {
   /** Use different tracers for client and server as usually they are on different hosts. */
   Tracing clientTracing = Tracing.newBuilder()
       .localServiceName("client")
-      .spanReporter(s -> storage.spanConsumer().accept(Collections.singletonList(s)))
+      .reporter((zipkin2.Span s) -> storage.spanConsumer().accept(Collections.singletonList(s)))
       .build();
   Tracing serverTracing = Tracing.newBuilder()
       .localServiceName("server")
-      .spanReporter(s -> storage.spanConsumer().accept(Collections.singletonList(s)))
+      .reporter((zipkin2.Span s) -> storage.spanConsumer().accept(Collections.singletonList(s)))
       .build();
 
   CountDownLatch flushedIncomingRequest = new CountDownLatch(1);

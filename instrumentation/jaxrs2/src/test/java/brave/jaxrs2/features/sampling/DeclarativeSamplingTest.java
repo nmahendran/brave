@@ -28,7 +28,7 @@ public class DeclarativeSamplingTest extends ServletContainer {
   ConcurrentLinkedDeque<Span> spans = new ConcurrentLinkedDeque<>();
   OkHttpClient client = new OkHttpClient();
   HttpTracing httpTracing = HttpTracing.newBuilder(Tracing.newBuilder()
-      .spanReporter(spans::add)
+      .reporter(spans::add)
       .build())
       .serverSampler(new Traced.Sampler(new HttpSampler() {
         @Override @Nonnull

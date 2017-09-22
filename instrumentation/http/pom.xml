@@ -10,22 +10,23 @@
   <artifactId>brave-instrumentation-http</artifactId>
   <name>Brave Instrumentation: Http Adapters</name>
 
+  <properties>
+    <main.basedir>${project.basedir}/../..</main.basedir>
+    <main.java.version>1.6</main.java.version>
+    <main.signature.artifact>java16</main.signature.artifact>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.auto.value</groupId>
       <artifactId>auto-value</artifactId>
       <scope>provided</scope>
     </dependency>
+
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>mockwebserver</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <properties>
-    <main.basedir>${project.basedir}/../..</main.basedir>
-    <main.java.version>1.6</main.java.version>
-    <main.signature.artifact>java16</main.signature.artifact>
-  </properties>
 </project>

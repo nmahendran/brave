@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import zipkin2.Span;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,7 +40,7 @@ public class AspectJSamplerTest {
 
   @Before public void clear() {
     tracing.set(Tracing.newBuilder()
-        .spanReporter(spans::add)
+        .reporter((Reporter<Span>) spans::add)
         .sampler(new Sampler() {
           @Override public boolean isSampled(long traceId) {
             throw new AssertionError(); // in this case, we aren't expecting a fallback

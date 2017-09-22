@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Test;
 import zipkin.Constants;
 import zipkin2.Annotation;
+import zipkin2.reporter.Reporter;
 
 import static com.github.kristofa.brave.TracerAdapter.getServerSpan;
 import static com.github.kristofa.brave.TracerAdapter.setServerSpan;
@@ -25,7 +26,7 @@ public class TracerAdapterTest {
   AtomicLong epochMicros = new AtomicLong();
   Tracer brave4 = Tracing.newBuilder()
       .clock(epochMicros::incrementAndGet)
-      .spanReporter(spans::add)
+      .reporter((Reporter<zipkin2.Span>) spans::add)
       .build()
       .tracer();
   Brave brave3 = TracerAdapter.newBrave(brave4);

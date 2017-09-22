@@ -105,7 +105,7 @@ public class ITTracingP6Factory {
 
   static Tracing.Builder tracingBuilder(Sampler sampler, ConcurrentLinkedDeque<Span> spans) {
     return Tracing.newBuilder()
-        .spanReporter(spans::add)
+        .reporter(spans::add)
         .currentTraceContext(new StrictCurrentTraceContext())
         .sampler(sampler);
   }

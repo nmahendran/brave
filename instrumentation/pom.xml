@@ -62,6 +62,18 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>brave</artifactId>
     </dependency>
+
+    <!-- zipkin v1 dependencies are needed for compile time due to method overloads -->
+    <dependency>
+      <groupId>io.zipkin.java</groupId>
+      <artifactId>zipkin</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter</groupId>
+      <artifactId>zipkin-reporter</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <build>

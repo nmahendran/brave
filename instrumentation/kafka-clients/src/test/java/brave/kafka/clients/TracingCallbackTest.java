@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.junit.After;
 import org.junit.Test;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,7 @@ public class TracingCallbackTest {
   LinkedList<zipkin2.Span> spans = new LinkedList<>();
 
   Tracing tracing = Tracing.newBuilder()
-      .spanReporter(spans::add)
+      .reporter((Reporter<zipkin2.Span>) spans::add)
       .sampler(Sampler.ALWAYS_SAMPLE)
       .build();
 

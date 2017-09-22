@@ -31,7 +31,7 @@ public class RequestSamplingTest {
   ConcurrentLinkedDeque<zipkin2.Span> spans = new ConcurrentLinkedDeque<>();
   Tracing tracing = Tracing.newBuilder()
       .localEndpoint(Endpoint.newBuilder().serviceName("server").build())
-      .spanReporter(spans::push)
+      .reporter(spans::push)
       .build();
   HttpTracing httpTracing = HttpTracing.newBuilder(tracing)
       // server starts traces under the path /api

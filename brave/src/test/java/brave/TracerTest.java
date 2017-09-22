@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Test;
 import zipkin2.Endpoint;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -96,7 +97,7 @@ public class TracerTest {
 
   @Test public void newTrace_debug_flag() {
     List<zipkin2.Span> spans = new ArrayList<>();
-    tracer = Tracing.newBuilder().spanReporter(spans::add).build().tracer();
+    tracer = Tracing.newBuilder().reporter((Reporter<zipkin2.Span>) spans::add).build().tracer();
 
     Span root = tracer.newTrace(SamplingFlags.DEBUG).start();
     root.finish();
@@ -133,7 +134,7 @@ public class TracerTest {
             return B3Propagation.create(keyFactory);
           }
         })
-        .spanReporter(spans::add).build().tracer();
+        .reporter((Reporter<zipkin2.Span>) spans::add).build().tracer();
 
     TraceContext fromIncomingRequest = tracer.newTrace().context();
 

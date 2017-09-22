@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import zipkin.internal.Util;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -33,7 +34,7 @@ public class KafkaTracingTest {
   @Before
   public void setUp() throws IOException {
     Tracing tracing = Tracing.newBuilder()
-        .spanReporter(spans::add)
+        .reporter((Reporter<zipkin2.Span>) spans::add)
         .sampler(Sampler.NEVER_SAMPLE)
         .build();
 

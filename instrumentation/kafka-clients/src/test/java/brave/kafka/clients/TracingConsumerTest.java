@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import zipkin.internal.Util;
 import zipkin2.Span;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -44,7 +45,7 @@ public class TracingConsumerTest {
   @Before
   public void init() throws IOException {
     tracing = Tracing.newBuilder()
-        .spanReporter(spans::add)
+        .reporter((Reporter<Span>) spans::add)
         .sampler(Sampler.ALWAYS_SAMPLE)
         .build();
 

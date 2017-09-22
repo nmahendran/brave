@@ -32,7 +32,7 @@ public abstract class ITHttp {
 
   Tracing.Builder tracingBuilder(Sampler sampler) {
     return Tracing.newBuilder()
-        .spanReporter(s -> {
+        .reporter((zipkin2.Span s) -> {
           // make sure the context was cleared prior to finish.. no leaks!
           TraceContext current = httpTracing.tracing().currentTraceContext().get();
           if (current != null) {

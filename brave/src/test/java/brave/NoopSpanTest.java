@@ -4,6 +4,7 @@ import brave.sampler.Sampler;
 import org.junit.After;
 import org.junit.Test;
 import zipkin2.Endpoint;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +13,7 @@ public class NoopSpanTest {
       .clock(() -> {
         throw new AssertionError();
       })
-      .spanReporter(s -> {
+      .reporter((Reporter<zipkin2.Span>) s -> {
         throw new AssertionError();
       })
       .build().tracer();

@@ -17,6 +17,20 @@
   </properties>
 
   <dependencies>
+    <!-- compile-only until v1 Tracing.Builder.localEndpoint,reporter overloads are removed -->
+    <dependency>
+      <groupId>io.zipkin.java</groupId>
+      <artifactId>zipkin</artifactId>
+      <version>@zipkin.version@</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter</groupId>
+      <artifactId>zipkin-reporter</artifactId>
+      <version>@zipkin-reporter.version@</version>
+      <optional>true</optional>
+    </dependency>
+
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-all</artifactId>

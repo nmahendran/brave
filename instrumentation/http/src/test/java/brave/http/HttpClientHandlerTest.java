@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import zipkin2.Span;
+import zipkin2.reporter.Reporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
@@ -32,14 +33,15 @@ public class HttpClientHandlerTest {
   HttpClientHandler<Object, Object> handler;
 
   @Before public void init() {
-    httpTracing = HttpTracing.newBuilder(Tracing.newBuilder().spanReporter(spans::add).build())
-        .clientSampler(sampler).build();
+    httpTracing = HttpTracing.newBuilder(
+        Tracing.newBuilder().reporter((Reporter<Span>) spans::add).build()
+    ).clientSampler(sampler).build();
     handler = HttpClientHandler.create(httpTracing, adapter);
 
     when(adapter.method(request)).thenReturn("GET");
   }
 
-  @After public void close(){
+  @After public void close() {
     Tracing.current().close();
   }
 

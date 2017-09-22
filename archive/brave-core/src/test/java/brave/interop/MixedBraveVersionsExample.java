@@ -47,12 +47,12 @@ public class MixedBraveVersionsExample {
   /** Use different tracers for client and server as usually they are on different hosts. */
   Tracing brave4Client = Tracing.newBuilder()
       .localEndpoint(Endpoint.newBuilder().serviceName("client").build())
-      .spanReporter(s -> storage.spanConsumer().accept(Collections.singletonList(s)))
+      .reporter((zipkin2.Span s) -> storage.spanConsumer().accept(Collections.singletonList(s)))
       .build();
   Brave brave3Client = TracerAdapter.newBrave(brave4Client.tracer());
   Tracing brave4Server = Tracing.newBuilder()
       .localEndpoint(Endpoint.newBuilder().serviceName("server").build())
-      .spanReporter(s -> storage.spanConsumer().accept(Collections.singletonList(s)))
+      .reporter((zipkin2.Span s) -> storage.spanConsumer().accept(Collections.singletonList(s)))
       .build();
   Brave brave3Server = TracerAdapter.newBrave(brave4Server.tracer());
 

@@ -124,7 +124,7 @@ public class ITTracingStatementInterceptor {
 
   Tracing.Builder tracingBuilder(Sampler sampler) {
     return Tracing.newBuilder()
-        .spanReporter(spans::add)
+        .reporter(spans::add)
         .currentTraceContext(new StrictCurrentTraceContext())
         .sampler(sampler);
   }

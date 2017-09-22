@@ -20,18 +20,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.zipkin.java</groupId>
-      <artifactId>zipkin</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.zipkin.reporter</groupId>
-      <artifactId>zipkin-reporter</artifactId>
-      <version>${zipkin-reporter.version}</version>
-    </dependency>
-    <dependency>
       <groupId>io.zipkin.reporter2</groupId>
       <artifactId>zipkin-reporter</artifactId>
-      <version>${zipkin-reporter2.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet</groupId>
@@ -46,6 +36,19 @@
       <artifactId>auto-value</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <!-- zipkin v1 dependencies are needed for compile time due to method overloads -->
+    <dependency>
+      <groupId>io.zipkin.java</groupId>
+      <artifactId>zipkin</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter</groupId>
+      <artifactId>zipkin-reporter</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- to mock Platform calls -->
     <dependency>
       <groupId>org.powermock</groupId>
